@@ -110,7 +110,7 @@
   .btn:hover{border-color:var(--border-strong);transform:translateY(-2px)}
   .btn:hover .go{transform:translate(3px,-3px)}
   .btn:active{transform:scale(.98)}
-  .btn:focus-visible,.toggle:focus-visible,.dl:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+  .btn:focus-visible,.toggle:focus-visible,.dl:focus-visible,.chip:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
   .btn.primary{background:var(--primary);color:var(--on-primary);border-color:transparent;box-shadow:0 18px 40px -22px var(--ember)}
   .btn.primary:hover{box-shadow:0 22px 48px -20px var(--ember)}
   .row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
@@ -139,6 +139,46 @@
   footer a{text-decoration:none;color:var(--fg)}
   footer .mono{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
 
+
+  /* projects */
+  .filters{display:flex;gap:8px;overflow-x:auto;margin:16px -20px 0;padding:2px 20px 4px;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .chip{flex:none;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--muted);
+        font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .25s ease}
+  .chip:hover{color:var(--fg);border-color:var(--border-strong)}
+  .chip.on{color:var(--on-primary);background:var(--primary);border-color:transparent}
+  .chip:focus-visible,.pbtn:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+  .projs{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+  .proj{padding:18px 18px 16px;border-radius:20px;border:1px solid var(--border);background:var(--card);box-shadow:var(--shadow);
+        transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .35s ease}
+  .proj:hover{transform:translateY(-3px);border-color:var(--border-strong)}
+  .proj[hidden]{display:none}
+  .ptop{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+  .pnum{font-family:"Instrument Serif",Georgia,serif;font-size:46px;line-height:.9;
+        background:linear-gradient(135deg,var(--primary),var(--ember));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .ploc{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:right;padding-bottom:4px}
+  .proj h3{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.12;margin-top:12px}
+  .psum{font-size:14.5px;line-height:1.55;color:var(--muted);margin-top:8px}
+  .phi{display:flex;gap:9px;font-size:14px;line-height:1.5;margin-top:10px}
+  .phi span{color:var(--ember);font-family:"JetBrains Mono",monospace}
+  .pstack{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--border);
+          font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .pstack span[aria-hidden]{opacity:.5}
+  .pacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .pbtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;text-decoration:none;
+        background:var(--raise);border:1px solid var(--border);font-size:14px;font-weight:500;transition:transform .2s ease,border-color .2s ease}
+  .pbtn:hover{transform:translateY(-2px);border-color:var(--border-strong)}
+  .pbtn:active{transform:scale(.97)}
+  .pbtn svg{width:16px;height:16px}
+  .pbtn span{opacity:.7}
+  .pbtn.ghost{background:transparent}
+  .pbtn.ghost svg{color:var(--ember)}
+  .pbadge{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;border:1px dashed var(--border);
+          font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .pbadge svg{width:15px;height:15px}
+  .allgh{margin-top:14px}
+  .allgh svg{color:var(--ember)}
+
   /* motion — same feel as the portfolio */
   @media (prefers-reduced-motion:no-preference){
     [data-reveal]{opacity:0;transform:translateY(24px);filter:blur(6px);
@@ -147,7 +187,7 @@
   }
   @media (prefers-reduced-motion:reduce){
     .glow,h1 em,.status i::after{animation:none}
-    .btn,.dl,.toggle,.fig img,.btn .go{transition:none}
+    .btn,.dl,.toggle,.fig img,.btn .go,.proj,.pbtn,.chip{transition:none}
   }
 </style>
 </head>
@@ -215,6 +255,125 @@
     <p class="hint" data-reveal>Tap the image to open it full size.</p>
   </section>
 
+
+  <section class="sec" id="projects" aria-labelledby="pj-title">
+    <p class="label" data-reveal>Selected work · 13 projects</p>
+    <h2 id="pj-title" data-reveal style="--d:80ms">Featured <em>projects</em></h2>
+    <div class="filters" role="group" aria-label="Filter projects" data-reveal style="--d:140ms">
+      <button type="button" class="chip on" data-f="all" aria-pressed="true">All</button>
+      <button type="button" class="chip" data-f="ai" aria-pressed="false">AI &amp; Deep Learning</button>
+      <button type="button" class="chip" data-f="pet" aria-pressed="false">Petroleum</button>
+      <button type="button" class="chip" data-f="data" aria-pressed="false">Data &amp; Analytics</button>
+    </div>
+    <div class="projs">
+    <article class="proj" data-cat="ai" data-reveal>
+      <div class="ptop"><span class="pnum">01</span><span class="ploc">AI Agents · Volve Field</span></div>
+      <h3>Well Log Analyst Agent — Deep Agents</h3>
+      <p class="psum">An AI agent that evaluates the Hugin reservoir well by well on Equinor&#x27;s open Volve data, applies Equinor&#x27;s petrophysical equations and writes analyst-style reports — with human approval before anything is saved.</p>
+      <p class="phi"><span aria-hidden="true">→</span>Porosity &amp; water saturation within tolerance in 8/8 Hugin wells; 9/9 agent behaviour tests passed</p>
+      <p class="pstack"><span>LangChain Deep Agents</span><span aria-hidden="true">/</span><span>LangGraph</span><span aria-hidden="true">/</span><span>Python</span><span aria-hidden="true">/</span><span>LangSmith</span></p>
+      <div class="pacts"><a class="pbtn" href="https://github.com/bassemsalah019-debug/Well-Log-Analyst-Agent" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View code<span aria-hidden="true">↗</span></a><a class="pbtn ghost" href="https://well-log-analyst-agent-ajq4nltauvx5urqnw2dhyt.streamlit.app/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor"/></svg>Live demo<span aria-hidden="true">↗</span></a></div>
+    </article>
+    <article class="proj" data-cat="ai" data-reveal>
+      <div class="ptop"><span class="pnum">02</span><span class="ploc">EYouth · Applied AI</span></div>
+      <h3>Instructor Evaluation Pipeline — Speech, NLP &amp; Vision</h3>
+      <p class="psum">A multimodal pipeline that turns a recorded live lecture into an instructor scorecard out of 100 — teaching quality, interaction, delivery and presence — using only open-source models.</p>
+      <p class="phi"><span aria-hidden="true">→</span>Arabic ASR (Cohere Transcribe + VAD), pyannote diarization, Qwen3-8B 4-bit scoring, audio &amp; video analysis</p>
+      <p class="pstack"><span>Python</span><span aria-hidden="true">/</span><span>Cohere Transcribe</span><span aria-hidden="true">/</span><span>pyannote</span><span aria-hidden="true">/</span><span>Qwen3</span></p>
+      <div class="pacts"><span class="pbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>Private · EYouth</span></div>
+    </article>
+    <article class="proj" data-cat="pet" data-reveal>
+      <div class="ptop"><span class="pnum">03</span><span class="ploc">North Sea · NW Russia</span></div>
+      <h3>Seismic Evaluation — TP Concession</h3>
+      <p class="psum">A full-cycle 3D seismic study mapping structural traps and prospective reservoir intervals, turning raw seismic into a drilling thesis.</p>
+      <p class="phi"><span aria-hidden="true">→</span>Horizon &amp; fault interpretation, attribute analysis, well-tie calibration and prospect ranking in Petrel</p>
+      <p class="pstack"><span>Petrel</span><span aria-hidden="true">/</span><span>Seismic Attributes</span><span aria-hidden="true">/</span><span>Reservoir Characterization</span></p>
+      <div class="pacts"><span class="pbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Graduation project · Suez University</span></div>
+    </article>
+    <article class="proj" data-cat="pet" data-reveal>
+      <div class="ptop"><span class="pnum">04</span><span class="ploc">Suez University Campus</span></div>
+      <h3>Electrical Survey — Geotechnical Study</h3>
+      <p class="psum">Near-surface geophysics using electrical resistivity to characterise the subsurface for civil-engineering decisions. Graded Excellent.</p>
+      <p class="phi"><span aria-hidden="true">→</span>Field acquisition, data inversion to cross-sections, and geotechnical recommendations</p>
+      <p class="pstack"><span>Resistivity Survey</span><span aria-hidden="true">/</span><span>PLAXIS</span><span aria-hidden="true">/</span><span>Geotechnical Analysis</span></p>
+      <div class="pacts"><span class="pbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Graduation project · Suez University</span></div>
+    </article>
+    <article class="proj" data-cat="ai" data-reveal>
+      <div class="ptop"><span class="pnum">05</span><span class="ploc">Deep Learning · F3 Block</span></div>
+      <h3>Seismic Fault Detection — 3D U-Net</h3>
+      <p class="psum">A 3D deep-learning pipeline that picks faults directly from seismic volumes, trained on synthetic data and transferred to a real field survey.</p>
+      <p class="phi"><span aria-hidden="true">→</span>F1 above 0.87 on held-out fault segments of the real F3 block (Netherlands)</p>
+      <p class="pstack"><span>PyTorch</span><span aria-hidden="true">/</span><span>3D U-Net</span><span aria-hidden="true">/</span><span>SEG-Y</span></p>
+      <div class="pacts"><a class="pbtn" href="https://github.com/bassemsalah019-debug/Seismic-Fault-Detection-Using-3D-Deep-Learning" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View code<span aria-hidden="true">↗</span></a></div>
+    </article>
+    <article class="proj" data-cat="ai" data-reveal>
+      <div class="ptop"><span class="pnum">06</span><span class="ploc">Petroleum Engineering</span></div>
+      <h3>Petroleum Engineering RAG Chatbot</h3>
+      <p class="psum">A retrieval-augmented assistant built from scratch so engineers can ask technical petroleum PDFs questions in plain language and get cited answers.</p>
+      <p class="phi"><span aria-hidden="true">→</span>Multi-document RAG with FAISS + sentence-transformers, FastAPI backend and Streamlit UI</p>
+      <p class="pstack"><span>Python</span><span aria-hidden="true">/</span><span>FAISS</span><span aria-hidden="true">/</span><span>FastAPI</span><span aria-hidden="true">/</span><span>Streamlit</span><span aria-hidden="true">/</span><span>Groq API</span></p>
+      <div class="pacts"><a class="pbtn" href="https://github.com/bassemsalah019-debug/Petroleum-Engineering-RAG-updated" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View code<span aria-hidden="true">↗</span></a></div>
+    </article>
+    <article class="proj" data-cat="data" data-reveal>
+      <div class="ptop"><span class="pnum">07</span><span class="ploc">Petrophysics</span></div>
+      <h3>Well Log Petrophysical Analysis</h3>
+      <p class="psum">An open-source Python workflow that reproduces Petrel/Techlog analysis — from a raw LAS file to shale volume, porosity, water saturation, net pay and reserves.</p>
+      <p class="phi"><span aria-hidden="true">→</span>7 stages: QC, Vshale, porosity, Archie Sw, net-pay cutoffs, OOIP/EUR</p>
+      <p class="pstack"><span>Python</span><span aria-hidden="true">/</span><span>lasio</span><span aria-hidden="true">/</span><span>Archie Equation</span></p>
+      <div class="pacts"><a class="pbtn" href="https://github.com/bassemsalah019-debug/bassemsalah019-debug/tree/main/projects/well-log-petrophysical-analysis" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View code<span aria-hidden="true">↗</span></a></div>
+    </article>
+    <article class="proj" data-cat="data" data-reveal>
+      <div class="ptop"><span class="pnum">08</span><span class="ploc">Machine Learning</span></div>
+      <h3>Body Performance ML Analytics</h3>
+      <p class="psum">An end-to-end ML pipeline classifying fitness levels from 13,000+ records, benchmarked across 30 model configurations and deployed as a live app.</p>
+      <p class="phi"><span aria-hidden="true">→</span>75.29% accuracy, 0.92 ROC-AUC, SHAP explainability, Gradio app on Hugging Face</p>
+      <p class="pstack"><span>Scikit-learn</span><span aria-hidden="true">/</span><span>SHAP</span><span aria-hidden="true">/</span><span>Gradio</span></p>
+      <div class="pacts"><a class="pbtn" href="https://github.com/bassemsalah019-debug/bassemsalah019-debug/tree/main/projects/body-performance-ml/projects/body-performance-ml" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View code<span aria-hidden="true">↗</span></a></div>
+    </article>
+    <article class="proj" data-cat="data" data-reveal>
+      <div class="ptop"><span class="pnum">09</span><span class="ploc">Data Engineering · BI</span></div>
+      <h3>Hospital Data Mining &amp; BI</h3>
+      <p class="psum">A production-grade hospital database plus a full data-mining pipeline across 318,000+ real admission records.</p>
+      <p class="phi"><span aria-hidden="true">→</span>22-table SQL Server database (3NF) and a 5-page interactive Power BI dashboard</p>
+      <p class="pstack"><span>SQL Server</span><span aria-hidden="true">/</span><span>Power BI</span><span aria-hidden="true">/</span><span>Python</span></p>
+      <div class="pacts"><a class="pbtn" href="https://github.com/bassemsalah019-debug/bassemsalah019-debug/tree/main/projects/hospital-los-data-mining" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View code<span aria-hidden="true">↗</span></a></div>
+    </article>
+    <article class="proj" data-cat="ai" data-reveal>
+      <div class="ptop"><span class="pnum">10</span><span class="ploc">Computer Vision</span></div>
+      <h3>Fabric Defect Detection — YOLOv8</h3>
+      <p class="psum">Object-detection pipeline that classifies fabric surface defects across 20 defect classes.</p>
+      
+      <p class="pstack"><span>YOLOv8</span><span aria-hidden="true">/</span><span>Computer Vision</span></p>
+      <div class="pacts"><a class="pbtn" href="https://github.com/bassemsalah019-debug/Fabric-Defect-Detection" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View code<span aria-hidden="true">↗</span></a></div>
+    </article>
+    <article class="proj" data-cat="ai" data-reveal>
+      <div class="ptop"><span class="pnum">11</span><span class="ploc">Computer Vision</span></div>
+      <h3>Motherboard Defect Detection — YOLOv8</h3>
+      <p class="psum">Detects 11 motherboard production defect classes at 93.49% mAP@0.5, deployed with Streamlit.</p>
+      
+      <p class="pstack"><span>YOLOv8</span><span aria-hidden="true">/</span><span>Streamlit</span></p>
+      <div class="pacts"><a class="pbtn" href="https://github.com/bassemsalah019-debug/Motherboard-Defect-Detection" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View code<span aria-hidden="true">↗</span></a></div>
+    </article>
+    <article class="proj" data-cat="ai" data-reveal>
+      <div class="ptop"><span class="pnum">12</span><span class="ploc">Computer Vision</span></div>
+      <h3>Steel Surface Defect Detection — YOLOv8 + Eigen-CAM</h3>
+      <p class="psum">Real-time defect detection with explainability, benchmarked across PyTorch, ONNX and TensorRT.</p>
+      
+      <p class="pstack"><span>YOLOv8</span><span aria-hidden="true">/</span><span>Eigen-CAM</span><span aria-hidden="true">/</span><span>ONNX</span><span aria-hidden="true">/</span><span>TensorRT</span></p>
+      <div class="pacts"><a class="pbtn" href="https://github.com/bassemsalah019-debug/SteelDefectDetection" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View code<span aria-hidden="true">↗</span></a></div>
+    </article>
+    <article class="proj" data-cat="data" data-reveal>
+      <div class="ptop"><span class="pnum">13</span><span class="ploc">Business Intelligence</span></div>
+      <h3>Children&#x27;s Clothing Sales Dashboard</h3>
+      <p class="psum">Interactive BI dashboard covering 12+ KPIs across sales, product and customer dimensions.</p>
+      
+      <p class="pstack"><span>Power BI</span><span aria-hidden="true">/</span><span>Data Analytics</span></p>
+      <div class="pacts"><a class="pbtn" href="https://github.com/bassemsalah019-debug/PROJECT-DATA-1" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>View code<span aria-hidden="true">↗</span></a></div>
+    </article>
+    </div>
+    <a class="btn allgh" data-reveal href="https://github.com/bassemsalah019-debug" target="_blank" rel="noopener"><svg style="width:19px;height:19px" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg><span class="lbl">All repositories on GitHub</span><span class="go" aria-hidden="true">↗</span></a>
+  </section>
+
   <footer data-reveal>
     <div><a href="mailto:bassemsalah019@gmail.com">bassemsalah019@gmail.com</a><br>Cairo, Egypt</div>
     <div class="mono">© 2026 Bassem Salah</div>
@@ -238,6 +397,23 @@
       sync();
     });
     sync();
+  })();
+
+
+  // Project filters
+  (function () {
+    var chips = document.querySelectorAll('.chip'), cards = document.querySelectorAll('.proj');
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var f = c.getAttribute('data-f');
+        chips.forEach(function (x) { var on = x === c; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+        cards.forEach(function (card) {
+          var show = f === 'all' || card.getAttribute('data-cat') === f;
+          card.hidden = !show;
+          if (show) card.classList.add('in');
+        });
+      });
+    });
   })();
 
   // Scroll reveal
