@@ -157,6 +157,9 @@
   .pnum{font-family:"Instrument Serif",Georgia,serif;font-size:46px;line-height:.9;
         background:linear-gradient(135deg,var(--primary),var(--ember));-webkit-background-clip:text;background-clip:text;color:transparent}
   .ploc{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:right;padding-bottom:4px}
+  .pimg{margin-top:12px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#000;aspect-ratio:3/2}
+  .pimg img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9;transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .4s ease}
+  .proj:hover .pimg img{transform:scale(1.04);opacity:1}
   .proj h3{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.12;margin-top:12px}
   .psum{font-size:14.5px;line-height:1.55;color:var(--muted);margin-top:8px}
   .phi{display:flex;gap:9px;font-size:14px;line-height:1.5;margin-top:10px}
@@ -187,7 +190,7 @@
   }
   @media (prefers-reduced-motion:reduce){
     .glow,h1 em,.status i::after{animation:none}
-    .btn,.dl,.toggle,.fig img,.btn .go,.proj,.pbtn,.chip{transition:none}
+    .btn,.dl,.toggle,.fig img,.btn .go,.proj,.pbtn,.chip,.pimg img{transition:none}
   }
 </style>
 </head>
@@ -268,6 +271,7 @@
     <div class="projs">
     <article class="proj" data-cat="ai" data-reveal>
       <div class="ptop"><span class="pnum">01</span><span class="ploc">AI Agents · Volve Field</span></div>
+      <div class="pimg"><img src="img/p01-well-agent.webp" alt="Well Log Analyst Agent — Deep Agents" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Well Log Analyst Agent — Deep Agents</h3>
       <p class="psum">An AI agent that evaluates the Hugin reservoir well by well on Equinor&#x27;s open Volve data, applies Equinor&#x27;s petrophysical equations and writes analyst-style reports — with human approval before anything is saved.</p>
       <p class="phi"><span aria-hidden="true">→</span>Porosity &amp; water saturation within tolerance in 8/8 Hugin wells; 9/9 agent behaviour tests passed</p>
@@ -276,6 +280,7 @@
     </article>
     <article class="proj" data-cat="ai" data-reveal>
       <div class="ptop"><span class="pnum">02</span><span class="ploc">EYouth · Applied AI</span></div>
+      <div class="pimg"><img src="img/p02-instructor-eval.webp" alt="Instructor Evaluation Pipeline — Speech, NLP &amp; Vision" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Instructor Evaluation Pipeline — Speech, NLP &amp; Vision</h3>
       <p class="psum">A multimodal pipeline that turns a recorded live lecture into an instructor scorecard out of 100 — teaching quality, interaction, delivery and presence — using only open-source models.</p>
       <p class="phi"><span aria-hidden="true">→</span>Arabic ASR (Cohere Transcribe + VAD), pyannote diarization, Qwen3-8B 4-bit scoring, audio &amp; video analysis</p>
@@ -284,6 +289,7 @@
     </article>
     <article class="proj" data-cat="pet" data-reveal>
       <div class="ptop"><span class="pnum">03</span><span class="ploc">North Sea · NW Russia</span></div>
+      <div class="pimg"><img src="img/p03-seismic-tp.webp" alt="Seismic Evaluation — TP Concession" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Seismic Evaluation — TP Concession</h3>
       <p class="psum">A full-cycle 3D seismic study mapping structural traps and prospective reservoir intervals, turning raw seismic into a drilling thesis.</p>
       <p class="phi"><span aria-hidden="true">→</span>Horizon &amp; fault interpretation, attribute analysis, well-tie calibration and prospect ranking in Petrel</p>
@@ -292,6 +298,7 @@
     </article>
     <article class="proj" data-cat="pet" data-reveal>
       <div class="ptop"><span class="pnum">04</span><span class="ploc">Suez University Campus</span></div>
+      <div class="pimg"><img src="img/p04-electrical-survey.webp" alt="Electrical Survey — Geotechnical Study" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Electrical Survey — Geotechnical Study</h3>
       <p class="psum">Near-surface geophysics using electrical resistivity to characterise the subsurface for civil-engineering decisions. Graded Excellent.</p>
       <p class="phi"><span aria-hidden="true">→</span>Field acquisition, data inversion to cross-sections, and geotechnical recommendations</p>
@@ -300,6 +307,7 @@
     </article>
     <article class="proj" data-cat="ai" data-reveal>
       <div class="ptop"><span class="pnum">05</span><span class="ploc">Deep Learning · F3 Block</span></div>
+      <div class="pimg"><img src="img/p05-fault-3d.webp" alt="Seismic Fault Detection — 3D U-Net" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Seismic Fault Detection — 3D U-Net</h3>
       <p class="psum">A 3D deep-learning pipeline that picks faults directly from seismic volumes, trained on synthetic data and transferred to a real field survey.</p>
       <p class="phi"><span aria-hidden="true">→</span>F1 above 0.87 on held-out fault segments of the real F3 block (Netherlands)</p>
@@ -308,6 +316,7 @@
     </article>
     <article class="proj" data-cat="ai" data-reveal>
       <div class="ptop"><span class="pnum">06</span><span class="ploc">Petroleum Engineering</span></div>
+      <div class="pimg"><img src="img/p06-rag.webp" alt="Petroleum Engineering RAG Chatbot" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Petroleum Engineering RAG Chatbot</h3>
       <p class="psum">A retrieval-augmented assistant built from scratch so engineers can ask technical petroleum PDFs questions in plain language and get cited answers.</p>
       <p class="phi"><span aria-hidden="true">→</span>Multi-document RAG with FAISS + sentence-transformers, FastAPI backend and Streamlit UI</p>
@@ -316,6 +325,7 @@
     </article>
     <article class="proj" data-cat="data" data-reveal>
       <div class="ptop"><span class="pnum">07</span><span class="ploc">Petrophysics</span></div>
+      <div class="pimg"><img src="img/p07-well-log.webp" alt="Well Log Petrophysical Analysis" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Well Log Petrophysical Analysis</h3>
       <p class="psum">An open-source Python workflow that reproduces Petrel/Techlog analysis — from a raw LAS file to shale volume, porosity, water saturation, net pay and reserves.</p>
       <p class="phi"><span aria-hidden="true">→</span>7 stages: QC, Vshale, porosity, Archie Sw, net-pay cutoffs, OOIP/EUR</p>
@@ -324,6 +334,7 @@
     </article>
     <article class="proj" data-cat="data" data-reveal>
       <div class="ptop"><span class="pnum">08</span><span class="ploc">Machine Learning</span></div>
+      <div class="pimg"><img src="img/p08-body-ml.webp" alt="Body Performance ML Analytics" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Body Performance ML Analytics</h3>
       <p class="psum">An end-to-end ML pipeline classifying fitness levels from 13,000+ records, benchmarked across 30 model configurations and deployed as a live app.</p>
       <p class="phi"><span aria-hidden="true">→</span>75.29% accuracy, 0.92 ROC-AUC, SHAP explainability, Gradio app on Hugging Face</p>
@@ -332,6 +343,7 @@
     </article>
     <article class="proj" data-cat="data" data-reveal>
       <div class="ptop"><span class="pnum">09</span><span class="ploc">Data Engineering · BI</span></div>
+      <div class="pimg"><img src="img/p09-hospital-bi.webp" alt="Hospital Data Mining &amp; BI" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Hospital Data Mining &amp; BI</h3>
       <p class="psum">A production-grade hospital database plus a full data-mining pipeline across 318,000+ real admission records.</p>
       <p class="phi"><span aria-hidden="true">→</span>22-table SQL Server database (3NF) and a 5-page interactive Power BI dashboard</p>
@@ -340,6 +352,7 @@
     </article>
     <article class="proj" data-cat="ai" data-reveal>
       <div class="ptop"><span class="pnum">10</span><span class="ploc">Computer Vision</span></div>
+      <div class="pimg"><img src="img/p10-fabric.webp" alt="Fabric Defect Detection — YOLOv8" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Fabric Defect Detection — YOLOv8</h3>
       <p class="psum">Object-detection pipeline that classifies fabric surface defects across 20 defect classes.</p>
       
@@ -348,6 +361,7 @@
     </article>
     <article class="proj" data-cat="ai" data-reveal>
       <div class="ptop"><span class="pnum">11</span><span class="ploc">Computer Vision</span></div>
+      <div class="pimg"><img src="img/p11-motherboard.webp" alt="Motherboard Defect Detection — YOLOv8" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Motherboard Defect Detection — YOLOv8</h3>
       <p class="psum">Detects 11 motherboard production defect classes at 93.49% mAP@0.5, deployed with Streamlit.</p>
       
@@ -356,6 +370,7 @@
     </article>
     <article class="proj" data-cat="ai" data-reveal>
       <div class="ptop"><span class="pnum">12</span><span class="ploc">Computer Vision</span></div>
+      <div class="pimg"><img src="img/p12-steel.webp" alt="Steel Surface Defect Detection — YOLOv8 + Eigen-CAM" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Steel Surface Defect Detection — YOLOv8 + Eigen-CAM</h3>
       <p class="psum">Real-time defect detection with explainability, benchmarked across PyTorch, ONNX and TensorRT.</p>
       
@@ -364,6 +379,7 @@
     </article>
     <article class="proj" data-cat="data" data-reveal>
       <div class="ptop"><span class="pnum">13</span><span class="ploc">Business Intelligence</span></div>
+      <div class="pimg"><img src="img/p13-clothing.webp" alt="Children&#x27;s Clothing Sales Dashboard" width="750" height="500" loading="lazy" decoding="async"></div>
       <h3>Children&#x27;s Clothing Sales Dashboard</h3>
       <p class="psum">Interactive BI dashboard covering 12+ KPIs across sales, product and customer dimensions.</p>
       
