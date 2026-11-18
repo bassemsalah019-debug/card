@@ -111,7 +111,7 @@
   .btn:hover{border-color:var(--border-strong);transform:translateY(-2px)}
   .btn:hover .go{transform:translate(3px,-3px)}
   .btn:active{transform:scale(.98)}
-  .btn:focus-visible,.toggle:focus-visible,.dl:focus-visible,.chip:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+  .btn:focus-visible,.toggle:focus-visible,.dl:focus-visible,.chip:focus-visible,.igjump a:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
   .btn.primary{background:var(--primary);color:var(--on-primary);border-color:transparent;box-shadow:0 18px 40px -22px var(--ember)}
   .btn.primary:hover{box-shadow:0 22px 48px -20px var(--ember)}
   .row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
@@ -141,6 +141,22 @@
   footer .mono{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
 
 
+  /* infographics */
+  .igjump{display:flex;gap:8px;margin-top:16px}
+  .igjump a{flex:1;display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;border:1px solid var(--border);background:var(--card);
+            text-decoration:none;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .2s,border-color .2s}
+  .igjump a:hover{color:var(--fg);border-color:var(--border-strong)}
+  .igs{display:grid;gap:26px;margin-top:20px;align-items:start}
+  .igc{scroll-margin-top:16px}
+  .igh{display:flex;align-items:flex-end;gap:14px}
+  .ign{font-family:"Instrument Serif",Georgia,serif;font-size:44px;line-height:.85;background:linear-gradient(135deg,var(--primary),var(--ember));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .igh h3{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:23px;line-height:1.1;margin-top:4px}
+  .igh h3 em{color:var(--ember)}
+  .igc .fig{margin-top:12px}
+  @media (min-width:980px){
+    .igs{grid-template-columns:repeat(2,minmax(0,1fr));width:min(1120px,calc(100vw - 48px));position:relative;left:50%;transform:translateX(-50%)}
+    .igjump{display:none}
+  }
   /* projects */
   .filters{display:flex;gap:8px;overflow-x:auto;margin:16px -20px 0;padding:2px 20px 4px;scrollbar-width:none}
   .filters::-webkit-scrollbar{display:none}
@@ -243,22 +259,38 @@
   </nav>
 
   <section class="sec" id="infographic" aria-labelledby="ig-title">
-    <p class="label" data-reveal>Project infographic</p>
-    <h2 id="ig-title" data-reveal style="--d:80ms">Seismic faults <em>&amp;</em> steel defects</h2>
-    <div class="fig" data-reveal style="--d:140ms">
-      <a href="Bassem_Salah_Infographic.jpg" target="_blank" rel="noopener" aria-label="Open the infographic full size">
-        <img src="Bassem_Salah_Infographic.jpg" alt="Infographic: Advanced Deep Learning Applications in Seismic Fault Interpretation and Steel Defect Detection" width="2934" height="1650" loading="lazy">
-      </a>
+    <p class="label" data-reveal>Infographics · 2</p>
+    <h2 id="ig-title" data-reveal style="--d:80ms">At a <em>glance</em></h2>
+    <nav class="igjump" aria-label="Jump to infographic" data-reveal style="--d:120ms">
+      <a href="#ig-me">About me</a><a href="#ig-grad">Graduation project</a>
+    </nav>
+    <div class="igs">
+      <article class="igc" id="ig-me" data-reveal style="--d:80ms">
+        <div class="igh"><span class="ign">01</span><div><p class="label">About me</p><h3>Bassem Salah — profile, journey &amp; results</h3></div></div>
+        <div class="fig">
+          <a href="Bassem_Salah_Personal_Infographic.jpg" target="_blank" rel="noopener" aria-label="Open about me infographic full size">
+            <img src="Bassem_Salah_Personal_Infographic.jpg" alt="Personal infographic: Bassem Salah — journey, toolkit, measured project results and certifications" width="1600" height="2800" loading="lazy">
+          </a>
+        </div>
+        <div class="dls">
+          <a class="dl" href="Bassem_Salah_Personal_Infographic.jpg" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>Download image</a>
+          <a class="dl" href="Bassem_Salah_Personal_Infographic.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>Download PDF</a>
+        </div>
+      </article>
+      <article class="igc" id="ig-grad" data-reveal style="--d:160ms">
+        <div class="igh"><span class="ign">02</span><div><p class="label">Graduation project</p><h3>Seismic faults <em>&amp;</em> steel defects</h3></div></div>
+        <div class="fig">
+          <a href="Bassem_Salah_Infographic.jpg" target="_blank" rel="noopener" aria-label="Open graduation project infographic full size">
+            <img src="Bassem_Salah_Infographic.jpg" alt="Infographic: Advanced Deep Learning Applications in Seismic Fault Interpretation and Steel Defect Detection" width="2934" height="1650" loading="lazy">
+          </a>
+        </div>
+        <div class="dls">
+          <a class="dl" href="Bassem_Salah_Infographic.jpg" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>Download image</a>
+          <a class="dl" href="Bassem_Salah_Infographic.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>Download PDF</a>
+        </div>
+      </article>
     </div>
-    <div class="dls" data-reveal style="--d:200ms">
-      <a class="dl" href="Bassem_Salah_Infographic.jpg" download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>Download image
-      </a>
-      <a class="dl" href="Bassem_Salah_Infographic.pdf" download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>Download PDF
-      </a>
-    </div>
-    <p class="hint" data-reveal>Tap the image to open it full size.</p>
+    <p class="hint" data-reveal>Tap an image to open it full size.</p>
   </section>
 
 

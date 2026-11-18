@@ -1,6 +1,6 @@
 # Bassem Salah — Job Fair QR page
 
-Landing page behind the QR code on my DIGILIANS job-fair ID card: CV, LinkedIn, GitHub, portfolio and the graduation-project infographic (view or download).
+Landing page behind the QR code on my DIGILIANS job-fair ID card: CV, LinkedIn, GitHub, portfolio, my personal infographic and the graduation-project infographic (view or download, image or PDF).
 
 **Live:** https://bassemsalah019-debug.github.io/card/
 
